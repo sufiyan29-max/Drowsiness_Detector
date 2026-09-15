@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Driver Guard 3D</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.min.js"></script>
+</head>
+<body>
+<div id="scene"></div>
+
+<header class="topbar glass">
+  <div><div class="eyebrow">REAL-TIME DRIVER SAFETY PROTOTYPE</div><h1>DRIVER GUARD <span>3D</span></h1></div>
+  <div class="top-actions">
+      <button id="audioBtn" class="audio-btn">ENABLE AUDIO</button>
+      <div id="connection" class="pill"><i></i><span>NodeMCU disconnected</span></div>
+    </div>
+</header>
+
+<aside class="panel left glass">
+  <div class="title">DRIVER STATE</div>
+  <div id="eyeCard" class="eye-card normal">
+    <div class="eye-symbol"><div class="pupil"></div></div>
+    <div><small>EYE STATUS</small><strong id="eyeStatus">OPEN</strong></div>
+  </div>
+  <div class="row"><span>Closed duration</span><b><span id="closedTime">0.0</span> s</b></div>
+  <div class="row"><span>Sensor</span><b id="sensorValue">—</b></div>
+
+  <hr><div class="title">AUTOMATIC BRAKING</div>
+  <div class="track"><div id="brakeFill"></div></div>
+  <div class="row"><span>Brake force</span><b id="brakeText">0%</b></div>
+
+  <div class="twocol">
+    <div id="hazardCard" class="status-card"><span>⚠</span><div><small>HAZARDS</small><b>OFF</b></div></div>
+    <div id="hornCard" class="status-card"><span>◖)))</span><div><small>HORN</small><b>OFF</b></div></div>
+  </div>
+</aside>
+
+<section class="speed glass">
+  <small>SIMULATED SPEED</small>
+  <div><span id="speedValue">60</span><em>km/h</em></div>
+  <b id="stateText">NORMAL</b>
+  <div class="drive-meta">
+    <span>ENGINE <b id="engineState">RUNNING</b></span>
+    <span>GEAR <b>D</b></span>
+  </div>
+</section>
+
+<aside class="panel right glass">
+  <div class="title">EMERGENCY RESPONSE</div>
+  <div id="sosCard" class="sos-card">
+    <div class="sos-circle">SOS</div>
+    <div><small>STATUS</small><strong id="sosStatus">STANDBY</strong></div>
+  </div>
+
+  <div class="location-card">
+    <div class="map">
+      <div class="road a"></div><div class="road b"></div><div class="road c"></div>
+      <div class="pin">●</div>
+    </div>
+    <div class="location-copy"><small>LIVE DEVICE LOCATION</small><div id="location">Waiting for SOS trigger…</div></div>
+  </div>
+
+  <hr><div class="title">EVENT STREAM</div>
+  <div id="events" class="events"></div>
+</aside>
+
+<footer>Simulation only — no real vehicle control or emergency-service contact.</footer>
+<script src="/static/script.js"></script>
+</body>
+</html>
